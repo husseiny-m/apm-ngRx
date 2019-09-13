@@ -1,16 +1,17 @@
 import * as formRoot from '../../state/app.state';
 import { Product } from '../product';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { ProductActions, ProductActionTypes } from './product.actions';
 
 export interface ProductState {
   showProductCode: boolean;
-  selectedProduct: Product;
+  currentProduct: Product;
   produts: Product[];
 }
 
-const stateInit = {
+const initialState = {
   showProductCode: true,
-  selectedProduct: null,
+  currentProduct: null,
   produts: []
 };
 
@@ -21,9 +22,9 @@ export const getShowProductCode = createSelector(
   state => state.showProductCode
 );
 
-export const getSelectedProduct = createSelector(
+export const getCurrentProduct = createSelector(
   getProductFeatureState,
-  state => state.selectedProduct
+  state => state.currentProduct
 );
 
 export const getProducts = createSelector(
@@ -31,15 +32,28 @@ export const getProducts = createSelector(
   state => state.produts
 );
 
-
 export interface State extends formRoot.State {
   products: ProductState;
 }
-export function reducer(state = stateInit, action) {
+export function reducer(state = initialState, action: ProductActions) {
   switch (action.type) {
-    case 'TOGGLE_PRODUCT_CODE':
+    case ProductActionTypes.ToggleProductCode:
       return { ...state, showProductCode: action.payload };
 
+    case ProductActionTypes.SetCurrrentProduct:
+      return { ...state, currentProduct: { ...action.payload } };
+
+    case ProductActionTypes.ClearCurrrentProduct:
+      return { ...state, currentProduct: null };
+
+    case ProductActionTypes.InitializeCurrrentProduct:
+      return { ...state, currentProduct: {
+        id: 0,
+        productName: '',
+        productCode: 'New',
+        description: '',
+        starRating: 0
+      } };
     default:
       return { ...state };
   }
