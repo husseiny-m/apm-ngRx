@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 
 import { AuthService } from './auth.service';
-import { UserState } from './state/user.state';
+import { UserState } from './state/user.reducer';
 
 @Component({
   templateUrl: './login.component.html',
