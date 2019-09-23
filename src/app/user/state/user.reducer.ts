@@ -1,12 +1,13 @@
+import { UserActions, UserActionTypes } from './user.actions';
 export interface UserState {
   maskUserName: boolean;
 }
 const initState = {
   maskUserName: true
 };
-export function reducer(state = initState, action) {
+export function reducer(state = initState, action: UserActions) {
   switch (action.type) {
-    case 'TOGGLE_USER_MASK':
+    case UserActionTypes.MaskUserName:
       return { ...state, maskUserName: action.payload };
     default:
       return state;
