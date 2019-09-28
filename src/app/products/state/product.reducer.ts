@@ -6,13 +6,13 @@ import { ProductActions, ProductActionTypes } from './product.actions';
 export interface ProductState {
   showProductCode: boolean;
   currentProduct: Product;
-  produts: Product[];
+  products: Product[];
 }
 
 const initialState = {
   showProductCode: true,
   currentProduct: null,
-  produts: []
+  products: []
 };
 
 const getProductFeatureState = createFeatureSelector<ProductState>('products');
@@ -29,7 +29,7 @@ export const getCurrentProduct = createSelector(
 
 export const getProducts = createSelector(
   getProductFeatureState,
-  state => state.produts
+  state => state.products
 );
 
 export interface State extends formRoot.State {
@@ -40,13 +40,13 @@ export function reducer(state = initialState, action: ProductActions) {
     case ProductActionTypes.ToggleProductCode:
       return { ...state, showProductCode: action.payload };
 
-    case ProductActionTypes.SetCurrrentProduct:
+    case ProductActionTypes.SetCurrentProduct:
       return { ...state, currentProduct: { ...action.payload } };
 
-    case ProductActionTypes.ClearCurrrentProduct:
+    case ProductActionTypes.ClearCurrentProduct:
       return { ...state, currentProduct: null };
 
-    case ProductActionTypes.InitializeCurrrentProduct:
+    case ProductActionTypes.InitializeCurrentProduct:
       return { ...state, currentProduct: {
         id: 0,
         productName: '',

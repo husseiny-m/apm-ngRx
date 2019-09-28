@@ -125,13 +125,13 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     if (this.product && this.product.id) {
       if (confirm(`Really delete the product: ${this.product.productName}?`)) {
         this.productService.deleteProduct(this.product.id).subscribe({
-          next: () => this.store.dispatch(new productActions.ClearCurrrentProduct()),
+          next: () => this.store.dispatch(new productActions.ClearCurrentProduct()),
           error: err => (this.errorMessage = err.error)
         });
       }
     } else {
       // No need to delete, it was never saved
-      this.store.dispatch(new productActions.ClearCurrrentProduct());
+      this.store.dispatch(new productActions.ClearCurrentProduct());
     }
   }
 
@@ -145,12 +145,12 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
         if (p.id === 0) {
           this.productService.createProduct(p).subscribe({
-            next: product => this.store.dispatch(new productActions.SetCurrrentProduct(product)),
+            next: product => this.store.dispatch(new productActions.SetCurrentProduct(product)),
             error: err => (this.errorMessage = err.error)
           });
         } else {
           this.productService.updateProduct(p).subscribe({
-            next: product => this.store.dispatch(new productActions.SetCurrrentProduct(product)),
+            next: product => this.store.dispatch(new productActions.SetCurrentProduct(product)),
             error: err => (this.errorMessage = err.error)
           });
         }

@@ -3,12 +3,12 @@ import { Product } from '../product';
 
 export enum ProductActionTypes {
   ToggleProductCode = '[Product] Toggle Product Code',
-  SetCurrrentProduct = '[Product] Set Current Product',
-  ClearCurrrentProduct = '[Product] Clear Current Product',
-  InitializeCurrrentProduct = '[Product] Initialize Current Product',
+  SetCurrentProduct = '[Product] Set Current Product',
+  ClearCurrentProduct = '[Product] Clear Current Product',
+  InitializeCurrentProduct = '[Product] Initialize Current Product',
   Load = '[Product] Load Products',
-  LoadSucces = '[Product] Load Products Success',
-  LoadFaild = '[Product] Load Products Failed'
+  LoadSuccess = '[Product] Load Products Success',
+  LoadFailed = '[Product] Load Products Failed'
 }
 
 export class ToggleProductCode implements Action {
@@ -16,38 +16,38 @@ export class ToggleProductCode implements Action {
   constructor(public payload: boolean) {}
 }
 
-export class SetCurrrentProduct implements Action {
-  readonly type = ProductActionTypes.SetCurrrentProduct;
+export class SetCurrentProduct implements Action {
+  readonly type = ProductActionTypes.SetCurrentProduct;
   constructor(public payload: Product) {}
 }
 
-export class ClearCurrrentProduct implements Action {
-  readonly type = ProductActionTypes.ClearCurrrentProduct;
+export class ClearCurrentProduct implements Action {
+  readonly type = ProductActionTypes.ClearCurrentProduct;
 }
 
-export class InitializeCurrrentProduct implements Action {
-  readonly type = ProductActionTypes.InitializeCurrrentProduct;
+export class InitializeCurrentProduct implements Action {
+  readonly type = ProductActionTypes.InitializeCurrentProduct;
 }
 
 export class Load implements Action {
   readonly type = ProductActionTypes.Load;
 }
 
-export class LoadSucces implements Action {
-  readonly type = ProductActionTypes.LoadSucces;
+export class LoadSuccess implements Action {
+  readonly type = ProductActionTypes.LoadSuccess;
   constructor(public payload: Product[]) {}
 }
 
-export class LoadFaild implements Action {
-  readonly type = ProductActionTypes.LoadFaild;
+export class LoadFailed implements Action {
+  readonly type = ProductActionTypes.LoadFailed;
   constructor(public payload: string) {}
 }
 
 export type ProductActions =
   | ToggleProductCode
-  | SetCurrrentProduct
-  | ClearCurrrentProduct
-  | InitializeCurrrentProduct
+  | SetCurrentProduct
+  | ClearCurrentProduct
+  | InitializeCurrentProduct
   | Load
-  | LoadSucces
-  | LoadFaild;
+  | LoadSuccess
+  | LoadFailed;
