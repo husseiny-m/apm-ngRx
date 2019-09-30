@@ -7,29 +7,36 @@ export interface ProductState {
   showProductCode: boolean;
   currentProduct: Product;
   products: Product[];
+  error: string;
 }
 
 const initialState = {
   showProductCode: true,
   currentProduct: null,
-  products: []
+  products: [],
+  error: ''
 };
 
 const getProductFeatureState = createFeatureSelector<ProductState>('products');
 
 export const getShowProductCode = createSelector(
   getProductFeatureState,
-  state => state.showProductCode
+  (state) => state.showProductCode
 );
 
 export const getCurrentProduct = createSelector(
   getProductFeatureState,
-  state => state.currentProduct
+  (state) => state.currentProduct
 );
 
 export const getProducts = createSelector(
   getProductFeatureState,
-  state => state.products
+  (state) => state.products
+);
+
+export const getError = createSelector(
+  getProductFeatureState,
+  (state) => state.error
 );
 
 export interface State extends formRoot.State {
@@ -47,13 +54,29 @@ export function reducer(state = initialState, action: ProductActions) {
       return { ...state, currentProduct: null };
 
     case ProductActionTypes.InitializeCurrentProduct:
-      return { ...state, currentProduct: {
-        id: 0,
-        productName: '',
-        productCode: 'New',
-        description: '',
-        starRating: 0
-      } };
+      return {
+        ...state,
+        currentProduct: {
+          id: 0,
+          productName: '',
+          productCode: 'New',
+          description: '',
+          starRating: 0
+        }
+      };
+
+    case ProductActionTypes.LoadSuccess:
+      return {
+        ...state,
+        products: action.payload,
+        error: ''
+      };
+    case ProductActionTypes.LoadFailed:
+      return {
+        ...state,
+        products: [],
+        error: action.payload
+      };
     default:
       return { ...state };
   }
