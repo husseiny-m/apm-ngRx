@@ -2,7 +2,6 @@ import * as fromRoot from '../../state/app.state';
 import { Product } from '../product';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ProductActions, ProductActionTypes } from './product.actions';
-import { stat } from 'fs';
 
 export interface ProductState {
   showProductCode: boolean;
@@ -107,6 +106,21 @@ export function reducer(state = initialState, action: ProductActions) {
         ...state,
         error: action.payload
       };
+
+      case ProductActionTypes.AddProductSuccess:
+        const newProducts = [...state.products, action.payload];
+        return {
+          ...state,
+          products: newProducts,
+          currentProductId: action.payload.id,
+          error: ''
+        };
+      case ProductActionTypes.AddProductFail:
+        return {
+          ...state,
+          error: action.payload
+        };
+
 
     default:
       return { ...state };
