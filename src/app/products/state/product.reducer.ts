@@ -123,8 +123,8 @@ export function reducer(state = initialState, action: ProductActions) {
       };
 
     case ProductActionTypes.DeleteProductSuccess:
-      const newProductsAfterDelete = state.products.filter((item) =>
-        action.payload !== item.id
+      const newProductsAfterDelete = state.products.filter((product) =>
+        action.payload !== product.id
       );
       return {
         ...state,
